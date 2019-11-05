@@ -9,7 +9,7 @@ export default function Login() {
       <Image source={logo} />
 
       <View styles={styles.form}>
-        <Text style={styles.label}>SEU E-MAIL *</Text>
+        <Text style={styles.label}>E-MAIL *</Text>
         <TextInput
           style={styles.input}
           placeholder="Seu e-mail"
@@ -19,17 +19,22 @@ export default function Login() {
           autoCorrect={false}
         /> 
 
-        <Text style={styles.label}>TECNOLOGIAS *</Text>
+        <Text style={styles.label}>SENHA *</Text>
         <TextInput
           style={styles.input}
-          placeholder="Tecnologias de interesse"
+          placeholder="Senha"
           placeholderTextColor="#999"
           autoCapitalize="words"
           autoCorrect={false}
+          secureTextEntry={true}
         />
 
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Encontrar spots</Text>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonCadastro}>
+          <Text style={styles.buttonText}>Cadastro</Text>
         </TouchableOpacity> 
       </View>
     </KeyboardAvoidingView>
@@ -72,6 +77,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 2,
+  },
+
+  buttonCadastro: {
+    height: 42,
+    backgroundColor: '#ddd',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 2,
+    marginTop: 5,
   },
 
   buttonText: {
