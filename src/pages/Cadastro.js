@@ -3,13 +3,13 @@ import { View, KeyboardAvoidingView, Platform, Image, Text, TextInput, Touchable
 
 import logoCopa from '../assets/logo-copa.png';
 
-export default function Login({ navigation }) {
-  async function handleSubmit() {
+export default function Cadastro({ navigation }) {
+  async function handleCadastrar() {
     navigation.navigate('Main');
   }
 
-  async function handleCadastrar() {
-    navigation.navigate('Cadastro');
+  async function handleVoltar() {
+    navigation.navigate('Login');
   }
 
   return (
@@ -37,12 +37,12 @@ export default function Login({ navigation }) {
           secureTextEntry={true}
         />
 
-        <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+        <TouchableOpacity onPress={handleCadastrar} style={styles.button}>
+          <Text style={styles.buttonText}>Cadastrar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleCadastrar} style={styles.buttonCadastro}>
-          <Text style={styles.buttonText}>Cadastro</Text>
+        <TouchableOpacity onPress={handleVoltar} style={styles.buttonCadastro}>
+          <Text style={styles.buttonText}>Voltar</Text>
         </TouchableOpacity> 
       </View>
     </KeyboardAvoidingView>
@@ -58,9 +58,8 @@ const styles = StyleSheet.create({
 
   form: {
     alignSelf: 'stretch',
-    flex: 2,
     paddingHorizontal: 30,
-    marginTop: 50,
+    marginTop: 30,
   },
 
   label: {

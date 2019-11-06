@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function pages() {
-  // static navigationOptions = {
-  //   title: 'Main',
-  // }
+import logoCopa from '../assets/logo-copa.png';
 
+export default function Main() {
   return (
-    <Text>Olá</Text>
+    <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
+      <Image source={logoCopa} />
+    </KeyboardAvoidingView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
