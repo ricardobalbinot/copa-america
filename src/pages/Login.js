@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+
+import firebase from '../firebase';
 
 import logoCopa from '../assets/logo-copa.png';
 
 export default function Login({ navigation }) {
-  async function handleSubmit() {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  async function handleLogin() {
+    // try {
+    //   firebase.auth()
+    //   .signInWithEmailAndPassword(email, senha)
+    //   .then((user) => {
+    //     console.log(user);
+    //     navigation.navigate('Main');
+    //   })
+    // } catch (error) {
+    //   console.log("Erro no login ", error);
+    // }
+
     navigation.navigate('Main');
+    
   }
 
   async function handleCadastrar() {
@@ -16,7 +33,7 @@ export default function Login({ navigation }) {
     <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
       <Image source={logoCopa} />
 
-      <View styles={styles.form}>
+      <View style={styles.form}>
         <Text style={styles.label}>E-MAIL *</Text>
         <TextInput
           style={styles.input}
@@ -25,6 +42,8 @@ export default function Login({ navigation }) {
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
+          value={email}
+          onChangeText={setEmail}
         /> 
 
         <Text style={styles.label}>SENHA *</Text>
@@ -35,9 +54,11 @@ export default function Login({ navigation }) {
           autoCapitalize="words"
           autoCorrect={false}
           secureTextEntry={true}
+          value={senha}
+          onChangeText={setSenha}
         />
 
-        <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+        <TouchableOpacity onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
@@ -58,9 +79,8 @@ const styles = StyleSheet.create({
 
   form: {
     alignSelf: 'stretch',
-    flex: 2,
     paddingHorizontal: 30,
-    marginTop: 50,
+    marginTop: 30,
   },
 
   label: {

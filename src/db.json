@@ -1,0 +1,30 @@
+{
+  "jogos": [
+    {
+      "id": "146815",
+      "date": "2019-06-15",
+      "home_name": "Brazil",
+      "away_name": "Bolivia",
+      "score": "3 - 0",
+      "status": "FINISHED"
+    },
+    {
+      "id": "147097",
+      "date": "2019-06-19",
+      "home_name": "Brazil",
+      "away_name": "Venezuela",
+      "score": "0 - 0",
+      "status": "FINISHED"
+    },
+    {
+      "id": "147358",
+      "date": "2019-06-22",
+      "home_name": "Peru",
+      "away_name": "Brazil",
+      "score": "0 - 5",
+      "status": "FINISHED"
+    }
+  ],
+  "next_page": false,
+  "prev_page": false
+}

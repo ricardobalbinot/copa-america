@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+
+import firebase from '../firebase';
 
 import logoCopa from '../assets/logo-copa.png';
 
 export default function Cadastro({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
   async function handleCadastrar() {
-    navigation.navigate('Main');
+    try {
+      if (senha < 3) {
+        alert("Senha menor que 3")
+        return;
+      }
+
+      firebase.auth()
+      .createUserWithEmailAndPassword(email, senha)
+    } catch (error) {
+      console.log(error.toString());
+    }
+    // navigation.navigate('Main');
   }
 
   async function handleVoltar() {
@@ -16,7 +32,7 @@ export default function Cadastro({ navigation }) {
     <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
       <Image source={logoCopa} />
 
-      <View styles={styles.form}>
+      <View style={styles.form}>
         <Text style={styles.label}>E-MAIL *</Text>
         <TextInput
           style={styles.input}
@@ -25,6 +41,8 @@ export default function Cadastro({ navigation }) {
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
+          value={email}
+          onChangeText={setEmail}
         /> 
 
         <Text style={styles.label}>SENHA *</Text>
@@ -35,6 +53,8 @@ export default function Cadastro({ navigation }) {
           autoCapitalize="words"
           autoCorrect={false}
           secureTextEntry={true}
+          value={senha}
+          onChangeText={setSenha}
         />
 
         <TouchableOpacity onPress={handleCadastrar} style={styles.button}>
