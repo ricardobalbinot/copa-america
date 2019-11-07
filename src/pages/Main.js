@@ -10,7 +10,7 @@ export default function Main() {
  
   renderJogos = ({ item }) => (
     <View>
-      <Text >Adversário: {item.away_name}</Text>
+      <Text >Adversário: {item.adversario}</Text>
       <Text >Jogo: {item.status}</Text>
       <TouchableOpacity>
         <Text>Ver mais</Text>
