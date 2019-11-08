@@ -3,23 +3,26 @@
     {
       "id": "146815",
       "data": "2019-06-15",
-      "adversario": "Bolivia",
-      "resultado": "3 - 0",
-      "status": "FINISHED"
+      "timeCasa": "Brasil",
+      "timeFora": "Bolivia",
+      "resultado": "3 x 0",
+      "status": "ENCERRADO"
     },
     {
       "id": "147097",
       "data": "2019-06-19",
-      "adversario": "Venezuela",
-      "resultado": "0 - 0",
-      "status": "FINISHED"
+      "timeCasa": "Brasil",
+      "timeFora": "Venezuela",
+      "resultado": "0 x 0",
+      "status": "ENCERRADO"
     },
     {
       "id": "147358",
       "data": "2019-06-22",
-      "adversario": "Peru",
-      "resultado": "5 - 0",
-      "status": "FINISHED"
+      "timeCasa": "Peru",
+      "timeFora": "Brasil",
+      "resultado": "0 x 5",
+      "status": "ENCERRADO"
     }
   ]
 }
