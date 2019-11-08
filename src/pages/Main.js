@@ -4,6 +4,10 @@ import { View, FlatList, KeyboardAvoidingView, Platform, Image, Text, TextInput,
 const db = require('../db.json');
 
 import logoCopa from '../assets/logo-copa.png';
+import Brasil from '../assets/Brasil.png';
+import Bolivia from '../assets/Bolivia.png';
+import Peru from '../assets/Peru.png';
+import Venezuela from '../assets/Venezuela.png';
 
 export default function Main({ navigation }) {
   const [jogos, setJogos] = useState(db.jogos);
@@ -13,15 +17,69 @@ export default function Main({ navigation }) {
       item,
     });
   }
+
+  function verificaBandeiraCasa(item) {
+    switch (item.timeCasa) {
+      case 'Brasil':
+        return (
+          <Image source={Brasil} />
+        );
+      case 'Peru':
+        return (
+          <Image source={Peru} />
+        );
+      case 'Venezuela':
+        return (
+          <Image source={Venezuela} />
+        );
+      case 'Bolivia':
+        return (
+          <Image source={Bolivia} />
+        );
+    }
+  }
+
+  function verificaBandeiraFora(item) {
+    switch (item.timeFora) {
+      case 'Brasil':
+        return (
+          <Image source={Brasil} />
+        );
+      case 'Peru':
+        return (
+          <Image source={Peru} />
+        );
+      case 'Venezuela':
+        return (
+          <Image source={Venezuela} />
+        );
+      case 'Bolivia':
+        return (
+          <Image source={Bolivia} />
+        );
+    }
+  }
  
   renderJogos = ({ item }) => (
     <View style={styles.confronto}>
       <View style={styles.info}>
-        <Text style={styles.times}>{item.timeCasa} X {item.timeFora}</Text>
-        <Text >{item.status}</Text>
+        <View style={styles.infoHeader}>
+          <View style={styles.esquerda}>
+            {verificaBandeiraCasa(item)}
+            <Text style={styles.timeCasaText}>{item.timeCasa} </Text>
+          </View>
+          <View style={styles.centro}>
+            <Text style={styles.centroText}>X</Text>
+          </View>
+          <View style={styles.direita}>
+            {verificaBandeiraFora(item)}
+            <Text style={styles.timeForaText}>{item.timeFora} </Text>
+          </View>
+        </View>
+        <Text style={styles.status}>{item.status} </Text>
       </View>
       <TouchableOpacity style={styles.button} onPress={() => handleResultado(item)} >
-        <Text style={styles.textBtn}>Ver mais</Text>
+        <Text style={styles.textBtn}>Ver resultado</Text>
       </TouchableOpacity>
     </View>
   )
@@ -52,6 +110,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 160,
     width: 160,
+    marginTop: 50,
   },
 
   list: {
@@ -70,9 +129,47 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  infoHeader: {
+    flexDirection: 'row',
+  },
+  
+  esquerda: {
+    alignItems: 'center',
+  },
+
+  centro: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 30,
+  },
+
+  direita: {
+    alignItems: 'center',
+  },
+
+  timeCasaText: {
+    fontSize: 15,
+  },
+
+  timeForaText: {
+    fontSize: 15,
+  },
+
+  centroText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 15,
+  },
+
+  status: {
+    marginTop: 10,
+    fontWeight: 'bold',
+  },
+
   times: {
     fontWeight: 'bold',
     fontSize: 18,
+    marginBottom: 10,
   },
 
   textBtn: {

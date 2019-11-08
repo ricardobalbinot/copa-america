@@ -18,10 +18,10 @@ export default function Cadastro({ navigation }) {
 
       firebase.auth()
       .createUserWithEmailAndPassword(email, senha)
+      .then(navigation.navigate('Main'))
     } catch (error) {
       console.log(error.toString());
     }
-    // navigation.navigate('Main');
   }
 
   async function handleVoltar() {

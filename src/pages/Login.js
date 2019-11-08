@@ -20,9 +20,8 @@ export default function Login({ navigation }) {
     // } catch (error) {
     //   console.log("Erro no login ", error);
     // }
-
-    navigation.navigate('Main');
     
+    navigation.navigate('Main');    
   }
 
   async function handleCadastrar() {

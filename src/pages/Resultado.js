@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 import logoCopa from '../assets/logo-copa.png';
@@ -10,16 +10,88 @@ import Venezuela from '../assets/Venezuela.png';
 export default function Resultado({ navigation }) {
   const item = navigation.getParam('item', {});
   const [jogo, setJogo] = useState(item);
+
+  function verificaBandeiraCasa() {
+    switch (jogo.timeCasa) {
+      case 'Brasil':
+        return (
+          <Image source={Brasil} />
+        );
+      case 'Peru':
+        return (
+          <Image source={Peru} />
+        );
+      case 'Venezuela':
+        return (
+          <Image source={Venezuela} />
+        );
+      case 'Bolivia':
+        return (
+          <Image source={Bolivia} />
+        );
+    }
+  }
+
+  function verificaBandeiraFora() {
+    switch (jogo.timeFora) {
+      case 'Brasil':
+        return (
+          <Image source={Brasil} />
+        );
+      case 'Peru':
+        return (
+          <Image source={Peru} />
+        );
+      case 'Venezuela':
+        return (
+          <Image source={Venezuela} />
+        );
+      case 'Bolivia':
+        return (
+          <Image source={Bolivia} />
+        );
+    }
+  }
+
+  // function splitResultado() {
+  //   const resultadoSplit = jogo.resultado.split('-');
+
+  //   setJogo({resultado: resultadoSplit});
+  // }
   
   return (
     <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
       <Image style={styles.logo} source={logoCopa} />
-
+      {/* {splitResultado()} */}
       <View style={styles.confronto}>
         <View style={styles.info}>
-          <View style={styles.bandeiras}>
-            <Image style={styles.bandeiraEsquerda} source={Brasil} />
-            <Image source={Bolivia} />
+          <View style={styles.infoHeader}>
+            <View style={styles.esquerda}>
+              {verificaBandeiraCasa()}
+              <Text style={styles.timeCasaText}>{jogo.timeCasa} </Text>
+              <Text style={styles.times}>{jogo.resultado[0]}</Text>
+            </View>
+            <View style={styles.centro}>
+              <Text style={styles.centroText}>X</Text>
+            </View>
+            <View style={styles.direita}>
+              {verificaBandeiraFora()}
+              <Text style={styles.timeForaText}>{jogo.timeFora} </Text>
+              <Text style={styles.times}>{jogo.resultado[2]}</Text>
+            </View>
+          </View>
+          
+          {/* <View style={styles.resultado}>
+            <Text style={styles.times}>{jogo.resultado}</Text>
+          </View> */}
+          
+
+
+
+
+          {/* <View style={styles.bandeiras}>
+            {verificaBandeiraCasa()}
+            {verificaBandeiraFora()}
           </View>
           <View style={styles.paises}>
             <Text style={styles.paisEsquerda}>{jogo.timeCasa} </Text>
@@ -27,8 +99,8 @@ export default function Resultado({ navigation }) {
           </View>
           <View style={styles.resultado}>
             <Text style={styles.times}>{jogo.resultado}</Text>
-          </View>
-          <Text>{jogo.data}</Text>
+          </View> */}
+          <Text style={styles.data}>{jogo.data}</Text>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -38,29 +110,49 @@ export default function Resultado({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
 
   logo: {
     height: 160,
     width: 160,
+    marginTop: 30,
   },
 
-  bandeiras: {
+  infoHeader: {
     flexDirection: 'row',
   },
+  
+  esquerda: {
+    alignItems: 'center',
+  },
 
-  paises: {
-    flexDirection: 'row',
+  centro: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 30,
+  },
+
+  direita: {
+    alignItems: 'center',
+  },
+
+  timeCasaText: {
+    fontSize: 15,
+  },
+
+  timeForaText: {
+    fontSize: 15,
+  },
+
+  centroText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 15,
   },
 
   resultado: {
     flexDirection: 'row',
-  },
-
-  bandeiraEsquerda: {
-    marginRight: 50,
   },
 
   paisEsquerda: {
@@ -96,6 +188,10 @@ const styles = StyleSheet.create({
   textBtn: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+
+  data: {
+    marginTop: 10,
   },
 
   button: {
