@@ -11,6 +11,8 @@ export default function Resultado({ navigation }) {
   const item = navigation.getParam('item', {});
   const [jogo, setJogo] = useState(item);
 
+  const [placarCasa, placarFora] = jogo.resultado.split('-');
+
   function verificaBandeiraCasa() {
     switch (jogo.timeCasa) {
       case 'Brasil':
@@ -53,23 +55,16 @@ export default function Resultado({ navigation }) {
     }
   }
 
-  // function splitResultado() {
-  //   const resultadoSplit = jogo.resultado.split('-');
-
-  //   setJogo({resultado: resultadoSplit});
-  // }
-  
   return (
     <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
       <Image style={styles.logo} source={logoCopa} />
-      {/* {splitResultado()} */}
       <View style={styles.confronto}>
         <View style={styles.info}>
           <View style={styles.infoHeader}>
             <View style={styles.esquerda}>
               {verificaBandeiraCasa()}
               <Text style={styles.timeCasaText}>{jogo.timeCasa} </Text>
-              <Text style={styles.times}>{jogo.resultado[0]}</Text>
+              <Text style={styles.times}>{placarCasa}</Text>
             </View>
             <View style={styles.centro}>
               <Text style={styles.centroText}>X</Text>
@@ -77,29 +72,10 @@ export default function Resultado({ navigation }) {
             <View style={styles.direita}>
               {verificaBandeiraFora()}
               <Text style={styles.timeForaText}>{jogo.timeFora} </Text>
-              <Text style={styles.times}>{jogo.resultado[2]}</Text>
+              <Text style={styles.times}>{placarFora}</Text>
             </View>
           </View>
           
-          {/* <View style={styles.resultado}>
-            <Text style={styles.times}>{jogo.resultado}</Text>
-          </View> */}
-          
-
-
-
-
-          {/* <View style={styles.bandeiras}>
-            {verificaBandeiraCasa()}
-            {verificaBandeiraFora()}
-          </View>
-          <View style={styles.paises}>
-            <Text style={styles.paisEsquerda}>{jogo.timeCasa} </Text>
-            <Text>{jogo.timeFora} </Text>
-          </View>
-          <View style={styles.resultado}>
-            <Text style={styles.times}>{jogo.resultado}</Text>
-          </View> */}
           <Text style={styles.data}>{jogo.data}</Text>
         </View>
       </View>
