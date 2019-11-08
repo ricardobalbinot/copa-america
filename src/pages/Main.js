@@ -8,8 +8,10 @@ import logoCopa from '../assets/logo-copa.png';
 export default function Main({ navigation }) {
   const [jogos, setJogos] = useState(db.jogos);
 
-  function handleResultado() {
-    // navigation.navigate('Resultado');
+  function handleResultado(item) {
+    navigation.navigate('Resultado', {
+      item,
+    });
   }
  
   renderJogos = ({ item }) => (
@@ -18,13 +20,14 @@ export default function Main({ navigation }) {
         <Text style={styles.times}>{item.timeCasa} X {item.timeFora}</Text>
         <Text >{item.status}</Text>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleResultado} >
+      <TouchableOpacity style={styles.button} onPress={() => handleResultado(item)} >
         <Text style={styles.textBtn}>Ver mais</Text>
       </TouchableOpacity>
     </View>
   )
   
   return (
+    
     <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
       <Image style={styles.logo} source={logoCopa} />
 
@@ -33,6 +36,7 @@ export default function Main({ navigation }) {
         data={jogos}
         keyExtractor={item => item.id.toString()}
         renderItem={this.renderJogos}
+        
       />
     </KeyboardAvoidingView>
   );
@@ -57,9 +61,9 @@ const styles = StyleSheet.create({
   },
 
   confronto: {
-    borderBottomWidth: 1,
+    borderTopWidth: 1,
     paddingHorizontal: 20,
-    marginBottom: 30,
+    paddingVertical: 15,
   },
 
   info: {

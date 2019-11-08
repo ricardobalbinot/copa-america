@@ -2,13 +2,15 @@ import { createAppContainer, createSwitchNavigator, createStackNavigator } from 
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
+import Resultado from './pages/Resultado';
 
 
 const Routes = createAppContainer(
   createSwitchNavigator({
     Login,
     Main,
-    Cadastro
+    Cadastro,
+    Resultado
   })
 );
 
