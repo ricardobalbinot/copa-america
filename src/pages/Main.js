@@ -86,14 +86,14 @@ export default function Main({ navigation }) {
   
   return (
     
-    <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
-      <Image style={styles.logo} source={logoCopa} />
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
       <FlatList
         style={styles.list}
         data={jogos}
         keyExtractor={item => item.id.toString()}
         renderItem={this.renderJogos}
+        ListHeaderComponent={<View style={styles.headerFlatlist}><Image style={styles.logo} source={logoCopa} /></View>}
         
       />
     </KeyboardAvoidingView>
@@ -110,7 +110,14 @@ const styles = StyleSheet.create({
   logo: {
     height: 160,
     width: 160,
-    marginTop: 50,
+    marginTop: 25,
+  },
+
+  headerFlatlist: {
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
   },
 
   list: {
@@ -140,7 +147,8 @@ const styles = StyleSheet.create({
   centro: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 30,
+    flexDirection: 'column',
+    marginHorizontal: 20,
   },
 
   direita: {
@@ -158,7 +166,7 @@ const styles = StyleSheet.create({
   centroText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 15,
+    marginBottom: 15,
   },
 
   status: {

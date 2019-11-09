@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ToastAndroid, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 import firebase from '../firebase';
 
@@ -10,18 +10,27 @@ export default function Login({ navigation }) {
   const [senha, setSenha] = useState('');
 
   async function handleLogin() {
-    // try {
-    //   firebase.auth()
-    //   .signInWithEmailAndPassword(email, senha)
-    //   .then((user) => {
-    //     console.log(user);
-    //     navigation.navigate('Main');
-    //   })
-    // } catch (error) {
-    //   console.log("Erro no login ", error);
-    // }
+    if (email && senha) {
+      try {
+        firebase.auth()
+        .signInWithEmailAndPassword(email, senha)
+        .then((user) => {
+          ToastAndroid.show('Usuário logado com sucesso!', ToastAndroid.SHORT);
+          navigation.navigate('Main');
+        }).catch( (error) => {
+          if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-email') {
+            ToastAndroid.show('Login ou senha incorretos!', ToastAndroid.SHORT);
+          } else if (error.code === 'auth/user-not-found') {
+            ToastAndroid.show('Usuário não encontrado', ToastAndroid.SHORT);
+          }
+        })
+      } catch (error) {
+        ToastAndroid.show('Tente novamente', ToastAndroid.SHORT);
+      }
+    } else {
+      ToastAndroid.show('Preencha todos os campos', ToastAndroid.SHORT);
+    }
     
-    navigation.navigate('Main');    
   }
 
   async function handleCadastrar() {
@@ -29,7 +38,7 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <Image source={logoCopa} />
 
       <View style={styles.form}>

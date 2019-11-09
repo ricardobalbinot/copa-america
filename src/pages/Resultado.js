@@ -56,8 +56,8 @@ export default function Resultado({ navigation }) {
   }
 
   return (
-    <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
-      <Image style={styles.logo} source={logoCopa} />
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      {/* <Image style={styles.logo} source={logoCopa} /> */}
       <View style={styles.confronto}>
         <View style={styles.info}>
           <View style={styles.infoHeader}>
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: '#cfcfcf',
   },
 
   logo: {
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   centroText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 15,
+    marginTop: 70,
   },
 
   resultado: {
@@ -150,6 +151,7 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     borderRadius: 5,
     marginHorizontal: 20,
+    backgroundColor: '#fff',
   },
 
   info: {
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0000CD',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 2,
+    borderRadius: 6,
     marginVertical: 10,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ToastAndroid, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 import firebase from '../firebase';
 
@@ -10,17 +10,34 @@ export default function Cadastro({ navigation }) {
   const [senha, setSenha] = useState('');
 
   async function handleCadastrar() {
-    try {
-      if (senha < 3) {
-        alert("Senha menor que 3")
-        return;
+    if (email && senha) {
+      try {
+        if (senha < 3) {
+          ToastAndroid.show('Senha muito fraca!', ToastAndroid.SHORT);
+          return;
+        }
+  
+        firebase.auth()
+        .createUserWithEmailAndPassword(email, senha)
+        .then(() => {
+          navigation.navigate('Main');
+          ToastAndroid.show('Usuário cadastrado com sucesso!', ToastAndroid.SHORT);
+        }).catch( (error) => {
+          if (error.code === 'auth/email-already-in-use') {
+            ToastAndroid.show('Email já em uso', ToastAndroid.SHORT);
+          } else if (error.code === 'auth/invalid-email') {
+            ToastAndroid.show('Email inválido', ToastAndroid.SHORT);
+          } else if (error.code === 'auth/weak-password') {
+            ToastAndroid.show('Senha muito fraca', ToastAndroid.SHORT);
+          } else if (error.code === 'auth/operation-not-allowed') {
+            ToastAndroid.show('Operação não permitida', ToastAndroid.SHORT);
+          }
+        })
+      } catch (error) {
+        ToastAndroid.show('Tente novamente', ToastAndroid.SHORT);
       }
-
-      firebase.auth()
-      .createUserWithEmailAndPassword(email, senha)
-      .then(navigation.navigate('Main'))
-    } catch (error) {
-      console.log(error.toString());
+    } else {
+      ToastAndroid.show('Preencha todos os campos', ToastAndroid.SHORT);
     }
   }
 
@@ -29,7 +46,7 @@ export default function Cadastro({ navigation }) {
   }
 
   return (
-    <KeyboardAvoidingView enabled={Platform.OS === 'ios'} behavior="padding" style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <Image source={logoCopa} />
 
       <View style={styles.form}>

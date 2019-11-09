@@ -24,7 +24,7 @@ const Routes = createAppContainer(
     Cadastro: {
       screen: Cadastro,
       navigationOptions: {
-        title: 'Cadastro',
+        header: null,
       },
     },
     Resultado: {
